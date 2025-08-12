@@ -1,0 +1,22 @@
+[
+  {"name": "시멘트", "unit": "kg", "price": 120.5},
+  {"name": "모래", "unit": "m3", "price": 45000},
+  {"name": "철근", "unit": "kg", "price": 900},
+  {"name": "콘크리트", "unit": "m3", "price": 75000},
+  {"name": "벽돌", "unit": "장", "price": 350},
+  {"name": "목재", "unit": "m3", "price": 550000},
+  {"name": "타일", "unit": "장", "price": 1500},
+  {"name": "유리", "unit": "m2", "price": 45000},
+  {"name": "페인트", "unit": "L", "price": 22000},
+  {"name": "단열재", "unit": "m2", "price": 18000},
+  {"name": "배관자재", "unit": "개", "price": 1500},
+  {"name": "전선", "unit": "m", "price": 2000},
+  {"name": "철문", "unit": "개", "price": 120000},
+  {"name": "방수재", "unit": "L", "price": 30000},
+  {"name": "석고보드", "unit": "장", "price": 2500},
+  {"name": "타포린", "unit": "롤", "price": 50000},
+  {"name": "접착제", "unit": "kg", "price": 3500},
+  {"name": "스테인리스", "unit": "kg", "price": 2500},
+  {"name": "알루미늄", "unit": "kg", "price": 2800},
+  {"name": "바닥재", "unit": "m2", "price": 32000}
+]
