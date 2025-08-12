@@ -1,4 +1,4 @@
-from .check_task_dicrionary import verify_submission
+from check import verify_dict_submission
 
 """
 TASK: 다수의 설계사무소들 이름을 받아서, 첫번째 글자에 따라 딕셔너리로 분류한다.
@@ -143,4 +143,6 @@ if __name__ == "__main__":
         "서클건축",
     ]
     architects_dict_by_first_letter = task(architects)
-    verify_submission(architects_dict_by_first_letter)
+
+    # 정답 체크
+    verify_dict_submission(architects_dict_by_first_letter)

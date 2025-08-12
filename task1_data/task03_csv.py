@@ -1,3 +1,5 @@
+from check import verify_csv_submission
+
 """
 TASK:
 
@@ -7,7 +9,7 @@ TASK:
 
 환경: Python
 입력: 버스 위치 및 혼잡도 데이터 (제공 데이터)
-출력: 20250729_버스혼잡도.csv(output 폴더에 있는 csv 파일)
+출력: 버스혼잡도_answer.csv(output 폴더에 저장될 파일)
 
 출력 데이터
     컬럼명 : "버스정류장ARS번호", "역명", "승차총승객수", "하차총승객수", "경도", "위도"
@@ -21,19 +23,28 @@ TASK:
 
 ### task 함수 정의 ###
 def task(
-    input_path1: str = "input/서울시버스정류소위치정보(20250801).xlsx",
-    input_path2: str = "input/BUS_STATION_BOARDING_MONTH_202507.csv",
-    output_path: str = "output/20250729_버스혼잡도.csv",
+    input_path1,
+    input_path2,
+    output_path,
 ):
     """
     Args:
         input_path1 (str): 버스 위치 정보 데이터 경로
         input_path2 (str): 버스 혼잡도 데이터 경로
         output_path (str): 출력 결과 CSV 경로
+
+        csv 저장 시에
+        to_csv(encoding = "utf-sig-8", index = False) 로 실행할 것
     """
     raise NotImplementedError
 
 
 ### 실행 ###
 if __name__ == "__main__":
-    task()
+    input_path1: str = "input/서울시버스정류소위치정보(20250801).xlsx"
+    input_path2: str = "input/BUS_STATION_BOARDING_MONTH_202507.csv"
+    output_path: str = "output/버스혼잡도_answer.csv"
+    result = task(input_path1, input_path2, output_path)
+
+    # 정답 체크
+    verify_csv_submission(result)
