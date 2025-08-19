@@ -40,12 +40,8 @@ def verify_dict_submission(submitted_dict: Dict):
     submitted_items = [(k, sorted(v)) for k, v in sorted(submitted_dict.items())]
 
     dict_ok = correct_items == submitted_items
-    keys_ok = set(CORRECT_DICT.keys()) == set(submitted_dict.keys())
-    values_ok = all(
-        set(CORRECT_DICT[k]) == set(submitted_dict.get(k, [])) for k in CORRECT_DICT
-    )
 
-    print(f"전체일치:{dict_ok} / 키일치:{keys_ok} / 값일치:{values_ok}")
+    print(f"정답 여부 : {dict_ok} ")
 
     if not dict_ok:
         # 틀린 키 찾기

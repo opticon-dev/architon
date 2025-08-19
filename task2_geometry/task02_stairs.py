@@ -22,8 +22,8 @@ def task(
     """
     # shapely geometry polygon은 z 가 있는 3차원 형태를 표현할 수 있다.
     # 단 geometry 연산은 z 값을 무시하고 이뤄진다.
-    # 여기서는 적절한 계단의 깊이와 높이를 구하고, 
-    # 계단 상판의 모양을 상상하라 
+    # 여기서는 적절한 계단의 깊이와 높이를 구하고,
+    # 계단 상판의 모양을 상상하라
     # 이를 polygon으로 구현한 후에, 리스트에 넣어 반환하라
     raise NotImplementedError
 

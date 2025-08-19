@@ -2,6 +2,7 @@
 import random
 import math
 
+
 # 목표 함수 정의
 def objective_function(x, points):
     distances = [math.hypot(x[0] - pt[0], x[1] - pt[1]) for pt in points]
@@ -11,8 +12,17 @@ def objective_function(x, points):
     area = math.pi * radius**2
     return 1 / area
 
+
 class GeneticAlgorithm:
-    def __init__(self, population_size, generations, crossover_rate, mutation_rate, bounds, points):
+    def __init__(
+        self,
+        population_size,
+        generations,
+        crossover_rate,
+        mutation_rate,
+        bounds,
+        points,
+    ):
         self.population_size = population_size
         self.generations = generations
         self.crossover_rate = crossover_rate
@@ -22,17 +32,24 @@ class GeneticAlgorithm:
 
     def initialize_population(self):
         min_x, max_x, min_y, max_y = self.bounds
-        return [(random.uniform(min_x, max_x), random.uniform(min_y, max_y)) for _ in range(self.population_size)]
+        return [
+            (random.uniform(min_x, max_x), random.uniform(min_y, max_y))
+            for _ in range(self.population_size)
+        ]
 
     def evaluate_fitness(self, population):
-        return [objective_function(individual, self.points) for individual in population]
+        return [
+            objective_function(individual, self.points) for individual in population
+        ]
 
     def selection(self, population, fitness):
         total_fitness = sum(fitness)
         if total_fitness == 0:
             return random.choices(population, k=self.population_size)
         selection_probs = [f / total_fitness for f in fitness]
-        selected_indices = random.choices(range(self.population_size), weights=selection_probs, k=self.population_size)
+        selected_indices = random.choices(
+            range(self.population_size), weights=selection_probs, k=self.population_size
+        )
         return [population[i] for i in selected_indices]
 
     def crossover(self, parents):
@@ -42,12 +59,18 @@ class GeneticAlgorithm:
             parent2 = parents[(i + 1) % self.population_size]
             if random.random() < self.crossover_rate:
                 alpha = random.random()
-                child1 = (alpha * parent1[0] + (1 - alpha) * parent2[0], alpha * parent1[1] + (1 - alpha) * parent2[1])
-                child2 = ((1 - alpha) * parent1[0] + alpha * parent2[0], (1 - alpha) * parent1[1] + alpha * parent2[1])
+                child1 = (
+                    alpha * parent1[0] + (1 - alpha) * parent2[0],
+                    alpha * parent1[1] + (1 - alpha) * parent2[1],
+                )
+                child2 = (
+                    (1 - alpha) * parent1[0] + alpha * parent2[0],
+                    (1 - alpha) * parent1[1] + alpha * parent2[1],
+                )
                 offspring.extend([child1, child2])
             else:
                 offspring.extend([parent1, parent2])
-        return offspring[:self.population_size]
+        return offspring[: self.population_size]
 
     def mutation(self, offspring):
         min_x, max_x, min_y, max_y = self.bounds
