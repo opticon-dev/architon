@@ -2,7 +2,7 @@ import random
 import math
 import time
 import matplotlib.pyplot as plt
-from genetic_algorithm import GeneticAlgorithm  
+from task4_search.optimization.opt_genetic_algorithm import GeneticAlgorithm  
 
 # 바운딩 박스 생성 함수
 def create_bounding_box(points):

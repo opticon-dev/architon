@@ -1,7 +1,7 @@
 import random
 import math
 import matplotlib.pyplot as plt
-from genetic_algorithm import GeneticAlgorithm  
+from task4_search.optimization.opt_genetic_algorithm import GeneticAlgorithm  
 # 랜덤 점 생성
 def generate_random_points(num_points, bounds):
     min_x, max_x, min_y, max_y = bounds
