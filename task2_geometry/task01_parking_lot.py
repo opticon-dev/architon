@@ -8,7 +8,6 @@ TASK: 주어진 임의의 가로, 세로 사각형에 대해 주차장을 계획
 출력: List[shapely.geometry.Polygon](주차장 cell의 리스트)
 
 샘플 데이터:
-
   output/task01_parking_output.png
 """
 
