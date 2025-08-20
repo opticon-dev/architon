@@ -5,19 +5,22 @@ import matplotlib.pyplot as plt
 
 """
 TASK:
-points를 모두 감싸는 최소 크기의 원을 찾아 원의 중심과 반지름을 리턴하라.
-관심이 생긴다면 answer에 있는 opt_ga_
+points를 모두 감싸는 최소 크기의 원을 찾아 원의 중심과 반지름을 리턴한다.
+
+자세한 내용은 answer 폴더에 있는 opt_ prefix가 있는 파일에 있으며,
+Genetic 알고리즘과의 비교 가능하다.
+
 
 환경: Python
 입력:
     points(점 좌표 리스트)
     resolution(탐색할 공간의 간격)
 출력:
-    
 
 """
 
 
+### task 함수 정의 ###
 # 바운딩 박스 생성 함수
 def create_bounding_box(points):
     x_coords = [pt[0] for pt in points]
@@ -74,7 +77,7 @@ def task(points, resolution=1.0):
     return best_center, best_radius
 
 
-# 시각화 함수
+### 시각화 함수 정의 ###
 def visualize_result(
     points,
     rule_center,
@@ -107,7 +110,7 @@ def visualize_result(
     plt.xlim(min(x for x, _ in points) - 10, max(x for x, _ in points) + 10)
     plt.ylim(min(y for _, y in points) - 10, max(y for _, y in points) + 10)
     plt.legend()
-    plt.title("GA vs Rule-based Minimum Bounding Circles")
+    plt.title("Rule-based Minimum Bounding Circles")
 
     fig.text(
         0.02,

@@ -2,6 +2,7 @@ from shapely.geometry import Polygon
 from typing import List
 
 
+### task 함수 정의 ###
 def task(parking_lot_boundary: Polygon) -> List[Polygon]:
     """
     주어진 주차장 경계에 따라 주차장 cell을 생성합니다.
@@ -55,6 +56,7 @@ def task(parking_lot_boundary: Polygon) -> List[Polygon]:
     return parking_cells
 
 
+### 실행 ###
 if __name__ == "__main__":
     parking_lot_width = 100
     parking_lot_height = 100

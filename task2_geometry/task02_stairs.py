@@ -1,12 +1,12 @@
 """
-TASK: 계단으로 극복해야 하는 거리와 높이가 정해졌을 때, 계단의 3차원 형태를 리턴하는 함수를 작성하라
+TASK: 계단으로 극복해야 하는 거리와 높이가 정해졌을 때, 계단의 3차원 형태를 리턴하는 함수를 작성한다.
 
 환경: python shapely
 입력: 계단의 거리(m), 계단의 높이(m)
 출력: List[shapely.geometry.Polygon(Z)](계단의 3차원 형태, 편의상 상판만 표현한다.)
 
 샘플 데이터:
-  output/task02_stairs_output.png
+  check/check02_stairs_output.png
 """
 
 

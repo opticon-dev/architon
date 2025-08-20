@@ -1,13 +1,13 @@
 """
 TASK: ChatGPT API를 사용하여 input/task01_GPT_api.png 이미지와 프롬프트를 전송하여,
-유명 건축가라고 스스로 생각하고 이 이미지에 대해서 내리는 평가를 받아오는 코드를 작성하라.
+스스로 유명 건축가라고 생각하고 해당 이미지에 대하여 내리는 평가를 받아오는 코드를 작성한다.
 
 환경: python openai
 입력: 이미지(input/task01_GPT_api.png), 프롬프트(str)
 출력: 평가(str)
 
 샘플 데이터:
-  output/task01_GPT_api_output.txt
+
 """
 
 

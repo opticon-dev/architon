@@ -20,7 +20,6 @@ TASK:
 
 """
 
-
 MAX_ITER = 500  # 최대 반복횟수
 ALPHA = 0.1  # ALPHA = 증가율
 NUM_POINTS = 100  # 생성할 원의 개수

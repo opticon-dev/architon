@@ -1,6 +1,0 @@
-task_GPT_api.py
-- input/task01_GPT_api.png 파일을 적당한 건축물 이미지 를 넣어주시면 (정현)
-
-task_shp.py
-- shp파일을 넣어야 됨(contour 만) 넣어서 
-- 실행후에 나오는 선들을 plt.show로 출력하고, 스샷 찍어서 output/task_shp.png 로 저장 (신후)
