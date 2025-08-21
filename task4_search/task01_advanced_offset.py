@@ -12,13 +12,9 @@ TASK:
 
 환경: Python
 입력: shapely.geometry.Polygon (원본 폴리곤)
-     distances (각 변마다 오프셋 거리)
-
-
+     distances (각 변마다 지정된 오프셋 거리)
 출력:
    offset.png("output/task01"에 저장)
-   원본 폴리곤, 새로운 폴리곤의 면적 값
-
 """
 
 
@@ -71,15 +67,14 @@ def visualize(original, new, distances):
     ax.legend()
     plt.tight_layout()
 
-    os.makedirs(f"output/task01", exist_ok=True)
-    plt.savefig(f"output/task01/offset.png", dpi=300, bbox_inches="tight")
+    os.makedirs(f"task4_search/output/task01", exist_ok=True)
+    plt.savefig(f"task4_search/output/task01/offset.png", dpi=300, bbox_inches="tight")
     plt.show()
 
 
 ### 실행 ###
 if __name__ == "__main__":
     # 테스트 1: 랜덤 폴리곤
-    print("=== 랜덤 폴리곤 테스트 ===")
     angles = np.sort(np.random.uniform(0, 2 * np.pi, 6))
     points = [
         (np.random.uniform(2, 5) * np.cos(a), np.random.uniform(2, 5) * np.sin(a))
@@ -91,7 +86,6 @@ if __name__ == "__main__":
     visualize(poly, new_poly, distances)
 
     # 테스트 2: 사각형
-    print("\n=== 사각형 테스트 ===")
     square = Polygon([(0, 0), (4, 0), (4, 4), (0, 4)])
     sq_distances = [0.5, 0.3, 0.8, 0.4]
     new_square = task(square, sq_distances)

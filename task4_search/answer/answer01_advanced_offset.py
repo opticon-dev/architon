@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 
 
+### task 함수 정의 ###
 def offset_polygon(polygon, distances):
 
     # 1. 반시계방향 확인 및 변환
@@ -42,13 +43,13 @@ def offset_polygon(polygon, distances):
         # 6. 연장된 선분 저장
         offset_lines.append(LineString([extend_p1, extend_p2]))
 
-    # 7-10. 연속된 선분들의 교차점 찾기
+    # 7-8. 연속된 선분들의 교차점 찾기
     intersections = []
     for i in range(len(offset_lines)):
         line1 = offset_lines[i - 1]  # i-1 (마지막일 때는 -1이므로 자동으로 마지막 요소)
         line2 = offset_lines[i]  # i
 
-        # 9. 교차점 계산
+        # 8. 교차점 계산
         try:
             point = line1.intersection(line2)
             if hasattr(point, "x"):
@@ -56,12 +57,12 @@ def offset_polygon(polygon, distances):
         except:
             pass
 
-    # 11. 교차점으로 폴리라인 생성
+    # 9. 교차점으로 폴리라인 생성
     return Polygon(intersections) if len(intersections) >= 3 else polygon
 
 
+### 시각화 함수 정의 ###
 def visualize(original, new, distances):
-    """시각화"""
     fig, ax = plt.subplots(figsize=(10, 8))
 
     # 원본 (회색)
@@ -94,15 +95,14 @@ def visualize(original, new, distances):
     plt.tight_layout()
 
     # 저장
-    os.makedirs(f"output", exist_ok=True)
-    plt.savefig(f"output/offset.png", dpi=300, bbox_inches="tight")
+    os.makedirs(f"task4_search/output/task01", exist_ok=True)
+    plt.savefig(f"task4_search/output/task01/offset.png", dpi=300, bbox_inches="tight")
     plt.show()
 
 
-# 실행 예시
+### 실행 ###
 if __name__ == "__main__":
     # 테스트 1: 랜덤 폴리곤
-    print("=== 랜덤 폴리곤 테스트 ===")
     angles = np.sort(np.random.uniform(0, 2 * np.pi, 6))
     points = [
         (np.random.uniform(2, 5) * np.cos(a), np.random.uniform(2, 5) * np.sin(a))
@@ -110,18 +110,11 @@ if __name__ == "__main__":
     ]
     poly = Polygon(points)
     distances = [np.random.uniform(0.1, 1.0) for _ in range(len(points))]
-
     new_poly = offset_polygon(poly, distances)
-    print(f"원본 면적: {poly.area:.2f}")
-    print(f"오프셋 후 면적: {new_poly.area:.2f}")
     visualize(poly, new_poly, distances)
 
     # 테스트 2: 사각형
-    print("\n=== 사각형 테스트 ===")
     square = Polygon([(0, 0), (4, 0), (4, 4), (0, 4)])
     sq_distances = [0.5, 0.3, 0.8, 0.4]
-
     new_square = offset_polygon(square, sq_distances)
-    print(f"사각형 원본 면적: {square.area:.2f}")
-    print(f"사각형 오프셋 후 면적: {new_square.area:.2f}")
     visualize(square, new_square, sq_distances)

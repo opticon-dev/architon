@@ -5,30 +5,28 @@ import matplotlib.pyplot as plt
 
 """
 TASK:
-points를 모두 감싸는 최소 크기의 원을 찾아 원의 중심과 반지름을 리턴하라.
-관심이 생긴다면 answer 폴더에 있는 opt_ prefix가 있는 파일들을 확인하라.
-Genetic 알고리즘과의 비교도 확인할 수 있다.
+points를 모두 감싸는 최소 크기의 원을 찾아 원의 중심과 반지름을 리턴한다.
+
+자세한 내용은 answer 폴더에 있는 opt_ prefix가 있는 파일에 있으며,
+Genetic 알고리즘과의 비교 가능하다.
+
 
 환경: Python
 입력:
     points(점 좌표 리스트)
     resolution(탐색할 공간의 간격)
 출력:
-    
 
 """
 
 
 ### task 함수 정의 ###
-
-
-# 점들에 대해 전수조사 방식으로 최소 원을 찾는 함수
 def task(points, resolution=1.0):
     """
-    points를 모두 감싸는 최소 크기의 원을 찾아 원의 중심과 반지름을 리턴하라.
+    points를 모두 감싸는 최소 크기의 원을 찾아 원의 중심과 반지름을 리턴한다.
 
     hint :
-    이 원의 중심은 points의 bounding box 안에 있을 수 밖에 없다.(상식)
+    이 원의 중심은 반드시 points의 bounding box 안에 존재한다.(상식)
 
 
     Args:
@@ -39,7 +37,7 @@ def task(points, resolution=1.0):
     raise NotImplementedError
 
 
-# 시각화 함수
+### 시각화 함수 정의 ###
 def visualize_result(
     points,
     rule_center,
@@ -54,7 +52,7 @@ def visualize_result(
     # 점들 표시
     ax.scatter(*zip(*points), color="blue", label="Points")
 
-    # 규칙 기반 결과 (빨간 원)
+    # 규칙 기반 결과 원 생성
     rule_circle = plt.Circle(
         rule_center,
         rule_radius,
@@ -66,13 +64,13 @@ def visualize_result(
     ax.add_artist(rule_circle)
 
     # 원의 중심점 표시
-    ax.scatter(*rule_center, color="red", zorder=5)  # Rule-based 중심점 (빨간색)
+    ax.scatter(*rule_center, color="red", zorder=5)  # Rule-based 중심점
 
     # 그래프 설정
     plt.xlim(min(x for x, _ in points) - 10, max(x for x, _ in points) + 10)
     plt.ylim(min(y for _, y in points) - 10, max(y for _, y in points) + 10)
     plt.legend()
-    plt.title("GA vs Rule-based Minimum Bounding Circles")
+    plt.title("Rule-based Minimum Bounding Circles")
 
     fig.text(
         0.02,

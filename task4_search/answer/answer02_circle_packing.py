@@ -41,16 +41,14 @@ def save_iteration(folder, iteration, points, radii):
     plt.close()
 
 
+### task 함수 정의 ###
 def check_overlap(p1, r1, p2, r2):
-    """두 원 겹침 확인"""
     distance = ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
     return distance < (r1 + r2)
 
 
 def separate_overlapping_circles(points, radii):
-    """겹치는 원들을 분리"""
     moved = False
-
     for i in range(len(points)):
         for j in range(i + 1, len(points)):
             if check_overlap(points[i], radii[i], points[j], radii[j]):
@@ -59,27 +57,26 @@ def separate_overlapping_circles(points, radii):
                 dy = points[i][1] - points[j][1]
                 distance = (dx**2 + dy**2) ** 0.5
 
-                if distance > 0:
-                    # 단위 벡터
-                    ux, uy = dx / distance, dy / distance
-                    move_dist = (radii[i] + radii[j] - distance + ALPHA) / 2
+                # 단위 벡터
+                ux, uy = dx / distance, dy / distance
+                move_dist = (radii[i] + radii[j] - distance + ALPHA) / 2
 
-                    # 원들을 밀어내기
-                    points[i] = (
-                        points[i][0] + ux * move_dist,
-                        points[i][1] + uy * move_dist,
-                    )
-                    points[j] = (
-                        points[j][0] - ux * move_dist,
-                        points[j][1] - uy * move_dist,
-                    )
-                    moved = True
+                # 원들을 밀어내기
+                points[i] = (
+                    points[i][0] + ux * move_dist,
+                    points[i][1] + uy * move_dist,
+                )
+                points[j] = (
+                    points[j][0] - ux * move_dist,
+                    points[j][1] - uy * move_dist,
+                )
+                moved = True
 
     return moved
 
 
+### 실행 함수 정의 ###
 def main():
-    """메인 실행 함수"""
     # 출력 폴더 생성
     output_folder = create_output_folder()
     print(f"결과 저장 위치: {output_folder}")
@@ -120,5 +117,6 @@ def main():
     gif_writer.close()
 
 
+### 실행 ###
 if __name__ == "__main__":
     main()

@@ -13,19 +13,6 @@ def generate_random_points(num_points, bounds):
     ]
 
 
-# 최대 범위 원을 찾는 목적 함수
-def objective_function(individual, points):
-    # 각 개체 (x, y)에 대해 점들과의 거리를 계산하고, 가장 먼 점과의 거리를 반지름으로 설정
-    distances = [
-        math.hypot(individual[0] - pt[0], individual[1] - pt[1]) for pt in points
-    ]
-    radius = max(distances)
-    if radius == 0:
-        return float("inf")
-    area = math.pi * radius**2
-    return 1 / area
-
-
 # 유전 알고리즘을 이용하여 최적의 원 찾기
 def find_bounding_circle(
     points,

@@ -1,0 +1,15 @@
+task2_geometry
+- answer02_Stairs, answer03_window 만들기(답안)
+- check01_parking_output.png, check02_stairs_output.png, check03_window_output.png 로 check 폴더에 이미지 저장하기
+
+task3_connection
+- task02_shp.py 만들기 *contour만
+    실행후에 나오는 선들을 plt.show로 출력
+    스샷 찍어서 check/check02_shp.png 로 
+    check 폴더에 이미지 저장하기
+
+
+#check 폴더 : 답안 채점용, 답안 이미지, 샘플 이미지
+#answer 폴더 : 답안 코드
+#input 폴더 : 제공 데이터 자료 
+#output 폴더 : 참여자 답안 제출용
