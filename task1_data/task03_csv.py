@@ -41,9 +41,9 @@ def task(
 
 ### 실행 ###
 if __name__ == "__main__":
-    input_path1: str = "input/서울시버스정류소위치정보(20250801).xlsx"
-    input_path2: str = "input/BUS_STATION_BOARDING_MONTH_202507.csv"
-    output_path: str = "output/버스혼잡도_answer.csv"
+    input_path1: str = "task1_data/input/서울시버스정류소위치정보(20250801).xlsx"
+    input_path2: str = "task1_data/input/BUS_STATION_BOARDING_MONTH_202507.csv"
+    output_path: str = "task1_data/output/버스혼잡도_answer.csv"
     result = task(input_path1, input_path2, output_path)
 
     # 정답 체크

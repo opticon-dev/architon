@@ -1,5 +1,5 @@
 from shapely.geometry import Polygon
-from utils import show_polygons
+from utils._viauslize_utils import show_polygons
 
 """
 TASK: 아파트 입면의 사이즈가 주어지면 아래 작업을 완료해야 한다.
@@ -18,19 +18,25 @@ TASK: 아파트 입면의 사이즈가 주어지면 아래 작업을 완료해�
 출력: List[shapely.geometry.Polygon](창문의 2차원 형태)
 
 샘플 데이터:
-  output/task03_window_output.png
+  check/check03_window_output.png
 """
 
 
 ### task 함수 정의 ###
 def task(
-    input_path: str = "input/points_sample.csv", output_path: str = "output/hull.csv"
+    apt_elevation_width: float, apt_floor_count: int, apt_floor_height: float = 3.0
 ):
     """
-    Args:
-        input_path (str): 입력 CSV 파일 경로
-        output_path (str): 출력 CSV 파일 경로
+    아파트 정면 입면에서 층/세대 기준에 맞추어 3베이 창문(층별 3개)을 배치한다.
+
+    규칙 요약:
+    - 층고: 3m, 층 수에 따라 층을 분리한다.
+    - 세대 폭: 최소 10m, 전체 폭을 균등 분할하여 세대를 만든다.
+    - 창 배치: 세대 경계로부터 좌우 1m 내부에서 시작, 창 사이 최소 1m 유지.
+    - 창 개수: 3개(좌/중/우). 중간 창 높이 0~2m, 좌우 창 높이 1.2~2m.
+    - 가로 길이는 황금비(가로:세로 ≈ 1.618)를 추구하되, 공간에 맞춰 폭 또는 간격을 조정.
     """
+
     raise NotImplementedError
 
 

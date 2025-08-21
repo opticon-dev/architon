@@ -46,6 +46,6 @@ if __name__ == "__main__":
         ]
     )
     parking_cells = task(parking_lot_boundary)
-    from utils import show_polygons
+    from utils._viauslize_utils import show_polygons
 
     show_polygons(parking_lot_boundary, *parking_cells)

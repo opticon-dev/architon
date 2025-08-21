@@ -34,6 +34,6 @@ if __name__ == "__main__":
     total_height = 3
 
     stairs = task(total_dist, total_height)
-    from utils import show_polygons
+    from utils._viauslize_utils import show_polygons
 
     show_polygons(stairs)

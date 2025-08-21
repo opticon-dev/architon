@@ -9,6 +9,7 @@ from shapely.geometry import (
 )
 from typing import Union, List
 from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 
 def show_linestrings(
@@ -78,6 +79,9 @@ def show_geoms(geometries: List[Union[Point, LineString, Polygon]]) -> None:
     """
     matplotlib을 사용하여 각 유형에 대해 특정 색상으로 기하학의 리스트를 시각화합니다.
 
+    제한: MultiPoint/MultiLineString/MultiPolygon은 지원하지 않는다. 필요 시
+    call-site에서 적절히 분해하여 전달할 것.
+
     매개변수:
     geometries: 기하학의 리스트
         시각화할 기하학입니다. 점은 빨간색, 선은 검은색, 다각형은 알파 0.5의 녹색입니다.
@@ -106,18 +110,61 @@ def show_polygons_Z(*polygons: Union[Polygon, MultiPolygon, List[Polygon]]) -> N
     """
     fig = plt.figure()
     ax = fig.add_subplot(111, projection="3d")
-    for polygon in polygons:
-        if isinstance(polygon, Polygon):
-            x, y, z = (
-                polygon.exterior.xy[0],
-                polygon.exterior.xy[1],
-                polygon.exterior.xy[2],
-            )
-            ax.plot_trisurf(x, y, z, color="green", alpha=0.5)
-        elif isinstance(polygon, MultiPolygon) or isinstance(polygon, list):
-            for poly in polygon:
-                x, y, z = poly.exterior.xy[0], poly.exterior.xy[1], poly.exterior.xy[2]
-                ax.plot_trisurf(x, y, z, color="green", alpha=0.5)
+
+    xs_all: List[float] = []
+    ys_all: List[float] = []
+    zs_all: List[float] = []
+
+    def _add_polygon_3d(poly: Polygon) -> None:
+        """Polygon(exterior.coords)의 (x,y,z) 좌표를 사용해 3D 면을 추가한다."""
+        # shapely 3D 좌표는 exterior.coords에서 (x, y, z) 형태로 접근한다.
+        coords = list(poly.exterior.coords)
+        verts = []
+        for c in coords:
+            if len(c) >= 3:
+                x, y, z = c[0], c[1], c[2]
+            else:
+                x, y, z = c[0], c[1], 0.0
+            verts.append((x, y, z))
+            xs_all.append(x)
+            ys_all.append(y)
+            zs_all.append(z)
+
+        collection = Poly3DCollection(
+            [verts], facecolors="green", edgecolors="black", alpha=0.5
+        )
+        ax.add_collection3d(collection)
+
+    for item in polygons:
+        if isinstance(item, Polygon):
+            _add_polygon_3d(item)
+        elif isinstance(item, MultiPolygon):
+            for poly in item.geoms:
+                _add_polygon_3d(poly)
+        elif isinstance(item, list):
+            for poly in item:
+                _add_polygon_3d(poly)
+
+    if xs_all and ys_all and zs_all:
+        # 축 같은 비율 유지: 전체 범위에서 가장 긴 길이를 기준으로 큐브 범위 설정
+        x_min, x_max = min(xs_all), max(xs_all)
+        y_min, y_max = min(ys_all), max(ys_all)
+        z_min, z_max = min(zs_all), max(zs_all)
+
+        x_mid = 0.5 * (x_min + x_max)
+        y_mid = 0.5 * (y_min + y_max)
+        z_mid = 0.5 * (z_min + z_max)
+
+        x_range = x_max - x_min
+        y_range = y_max - y_min
+        z_range = z_max - z_min
+        max_range = max(x_range, y_range, z_range, 1e-9)
+
+        half = 0.5 * max_range
+        ax.set_xlim(x_mid - half, x_mid + half)
+        ax.set_ylim(y_mid - half, y_mid + half)
+        ax.set_zlim(z_mid - half, z_mid + half)
+
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
     ax.set_zlabel("Z")
