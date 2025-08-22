@@ -36,6 +36,7 @@ def task(architects_list):
     """
     이 부분에서 위 task를 구현하시오
     """
+    architects_dict_by_first_letter = {}
     raise NotImplementedError
 
 
